@@ -4,7 +4,8 @@ const serverConfig = require('../../../config/server');
 const veiculoModel = require('./veiculoModel')();
 const cliente = new serverConfig.restifyRoute();
 const validations = require('../../../util/validations')();
-const camposObrigatorioCadastro = ['placa', 'chassi', 'renavam', 'modelo', 'marca', 'ano'];
+const camposObrigatorioCadastro = ['marca', 'modelo', 'ano', 'renavam', 'placa', 'chassi'];
+const camposObrigatorioPesquisaPlaca = ['placa'];
 
 cliente.post('/cadastro/veiculo', async function (req, res, next) {
     const body = req.body;
@@ -24,7 +25,7 @@ cliente.post('/cadastro/veiculo', async function (req, res, next) {
         res.status(400);
         res.send(errorResponse);
     } else {
-        var validaVeiculo = veiculoModel.validaVeiculo(body);
+        var validaVeiculo = await veiculoModel.validaVeiculo(body);
         if (validaVeiculo.error) {
             res.status(500);
             res.send({
@@ -33,7 +34,7 @@ cliente.post('/cadastro/veiculo', async function (req, res, next) {
             });
 
         } else {
-            if (validaVeiculo.veiculoCadstrado === 1) {
+            if (validaVeiculo.veiculoCadstrado > 0) {
                 res.status(400);
                 res.send({
                     codigo: 2,
@@ -41,8 +42,22 @@ cliente.post('/cadastro/veiculo', async function (req, res, next) {
                     message: 'Agumas destas informações ja foram castradas'
                 });
             } else {
+                var inserirVeiculo = await veiculoModel.inserirVeiculo(body);
+                console.error(inserirVeiculo.error);
+                if (inserirVeiculo.error) {
+                    res.status(500);
+                    res.send({
+                        codigo: 3,
+                        message: 'Erro verificação de veiculo'
+                    });
 
-                var cravaVeicul0 = await veiculoModel.gravarVeiculo(body, novoId);
+                } else {
+                    res.status(200);
+                    res.send({
+                        codigo: 4,
+                        message: 'Veiculo cadastrado com sucesso'
+                    });
+                }
             }
         }
 
@@ -50,28 +65,78 @@ cliente.post('/cadastro/veiculo', async function (req, res, next) {
 
 });
 
-cliente.post('/retorna/veiculo', async function (req, res, next) {
+cliente.get('/retorna/veiculos', async function (req, res, next) {
 
-
-    var dadosVeiculos = veiculoModel.retornaVEiculos();
-    if (dadosVeiculos.dadosVeiculos) {
+    var dadosVeiculos = await veiculoModel.listarVeiculos();
+    if (dadosVeiculos.error) {
+        res.status(500);
+        res.send({
+            codigo: 5,
+            message: 'Erro ao veriricar veiculos'
+        });
+    } else if (dadosVeiculos.semDados) {
         res.status(400);
         res.send({
-            codigo: 3,
-            data: dadosVeiculos.dadosVeiculos,
-            message: 'Dados Veiculos'
+            codigo: 6,
+            message: 'Sem veiculos cadastrados'
         });
     } else {
-        es.status(400);
+        res.status(400);
         res.send({
-            codigo: 4,
-            data: {},
-            message: 'Sem veiculos cadastrados'
+            codigo: 7,
+            data: dadosVeiculos.dadosVeiculos,
+            message: 'Dados veiculos cadastrados'
         });
     }
 
 
 });
+
+cliente.get('/pesquisa/veiculo', async function (req, res, next) {
+    const body = req.body;
+    var errorResponse = []
+
+    let validaBody = await validations.validaBody(body, camposObrigatorioPesquisaPlaca);
+
+    if (validaBody.length) {
+        errorResponse.push({
+            codigo: 7,
+            data: validaBody,
+            message: 'Campos obrigatórios não foram informados'
+        });
+    };
+
+    if (errorResponse.length) {
+        res.status(400);
+        res.send(errorResponse);
+    } else {
+        var dadosVeiculoPlaca = await veiculoModel.listarVeiculoPlaca(body.placa);
+        if (dadosVeiculoPlaca.error) {
+            res.status(500);
+            res.send({
+                codigo: 8,
+                message: 'Erro ao veriricar veiculos'
+            });
+        } else if (dadosVeiculoPlaca.semDados) {
+            res.status(400);
+            res.send({
+                codigo: 9,
+                data: body.placa,
+                message: 'Veiculo não cadastrado'
+            });
+        } else {
+            res.status(400);
+            res.send({
+                codigo: 10,
+                data: dadosVeiculoPlaca.dadosVeiculo,
+                message: 'Dados veiculos cadastrados'
+            });
+        }
+    }
+
+});
+
+
 
 
 
