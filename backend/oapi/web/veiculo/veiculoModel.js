@@ -83,10 +83,30 @@ module.exports = function () {
         return retorno;
     };
 
+    async function deletarVeiculo(idVeiculo) {
+        let retorno = {
+            sucessoDelete: false,
+            error: undefined
+        };
+        let promise = await clienteSql.deleteVeiculo(idVeiculo)
+            .then(function (rowsDeleteVeiculo) {
+                console.log(rowsDeleteVeiculo)
+                if (rowsDeleteVeiculo > 0) {
+                    retorno.sucessoDelete = true
+                }
+            })
+            .catch(function (error) {
+                retorno.error = error;
+            })
+
+        return retorno;
+    };
+
     return {
         validaVeiculo: validaVeiculo,
         inserirVeiculo: inserirVeiculo,
         listarVeiculos: listarVeiculos,
-        listarVeiculoPlaca: listarVeiculoPlaca
+        listarVeiculoPlaca: listarVeiculoPlaca,
+        deletarVeiculo: deletarVeiculo
     }
 };

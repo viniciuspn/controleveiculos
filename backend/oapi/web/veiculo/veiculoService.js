@@ -6,6 +6,7 @@ const cliente = new serverConfig.restifyRoute();
 const validations = require('../../../util/validations')();
 const camposObrigatorioCadastro = ['marca', 'modelo', 'ano', 'renavam', 'placa', 'chassi'];
 const camposObrigatorioPesquisaPlaca = ['placa'];
+const camposObrigatorioDelete = ['idVeiculo'];
 
 cliente.post('/cadastro/veiculo', async function (req, res, next) {
     const body = req.body;
@@ -136,8 +137,46 @@ cliente.get('/pesquisa/veiculo', async function (req, res, next) {
 
 });
 
+cliente.delete('/delete/veiculo', async function (req, res, next) {
+    const body = req.body;
+    var errorResponse = []
 
+    let validaBody = await validations.validaBody(body, camposObrigatorioDelete);
 
+    if (validaBody.length) {
+        errorResponse.push({
+            codigo: 10,
+            data: validaBody,
+            message: 'Campos obrigatórios não foram informados'
+        });
+    };
 
+    if (errorResponse.length) {
+        res.status(400);
+        res.send(errorResponse);
+    } else {
+        var deletaVeiculo = await veiculoModel.deletarVeiculo(body.idVeiculo);
+        if (deletaVeiculo.error) {
+            res.status(500);
+            res.send({
+                codigo: 11,
+                message: 'Erro ao deletar veiculo'
+            });
+        } else if (deletaVeiculo.sucessoDelete) {
+            res.status(400);
+            res.send({
+                codigo: 12,
+                message: 'Veiculo excluido'
+            });
+        } else {
+            res.status(400);
+            res.send({
+                codigo: 13,
+                message: 'Veiculo informado não encontrado'
+            });
+        }
+    }
+
+});
 
 module.exports = cliente;

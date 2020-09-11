@@ -52,11 +52,18 @@ module.exports = function () {
             );
     };
 
+    function deleteVeiculo(idVeiculo) {
+        return connVeiculo('veiculos')
+            .where('id', '=', idVeiculo)
+            .delete();
+    };
+
     return {
         validaVeiculo: validaVeiculo,
         inseriVeiculo: inseriVeiculo,
         listaVeiculo: listaVeiculo,
-        listaVeiculoPlaca: listaVeiculoPlaca
+        listaVeiculoPlaca: listaVeiculoPlaca,
+        deleteVeiculo: deleteVeiculo
     };
 
 };
