@@ -2,14 +2,14 @@ const _ = require('underscore');
 
 const serverConfig = require('../../../config/server');
 const veiculoModel = require('./veiculoModel')();
-const cliente = new serverConfig.restifyRoute();
+const veiculo = new serverConfig.restifyRoute();
 const validations = require('../../../util/validations')();
 const camposObrigatorioCadastro = ['marca', 'modelo', 'ano', 'renavam', 'placa', 'chassi'];
 const camposObrigatorioPesquisaPlaca = ['placa'];
 const camposObrigatorioDelete = ['idVeiculo'];
 const camposObrigatorioAtualiza = ['idVeiculo', 'marca', 'modelo', 'ano', 'renavam', 'placa', 'chassi'];
 
-cliente.post('/cadastro/veiculo', async function (req, res, next) {
+veiculo.post('/cadastro/veiculo', async function (req, res, next) {
     const body = req.body;
     var errorResponse = []
 
@@ -66,14 +66,14 @@ cliente.post('/cadastro/veiculo', async function (req, res, next) {
 
 });
 
-cliente.get('/retorna/veiculos', async function (req, res, next) {
+veiculo.get('/retorna/veiculos', async function (req, res, next) {
 
     var dadosVeiculos = await veiculoModel.listarVeiculos();
     if (dadosVeiculos.error) {
         res.status(500);
         res.send({
             codigo: 5,
-            message: 'Erro ao veriricar veiculos'
+            message: 'Erro ao listar veiculos'
         });
     } else if (dadosVeiculos.semDados) {
         res.status(400);
@@ -86,14 +86,14 @@ cliente.get('/retorna/veiculos', async function (req, res, next) {
         res.send({
             codigo: 7,
             data: dadosVeiculos.dadosVeiculos,
-            message: 'Dados veiculos cadastrados'
+            message: 'Lista de Veiculos'
         });
     }
 
 
 });
 
-cliente.get('/pesquisa/veiculo', async function (req, res, next) {
+veiculo.get('/pesquisa/veiculo', async function (req, res, next) {
     const body = req.body;
     var errorResponse = []
 
@@ -101,7 +101,7 @@ cliente.get('/pesquisa/veiculo', async function (req, res, next) {
 
     if (validaBody.length) {
         errorResponse.push({
-            codigo: 7,
+            codigo: 8,
             data: validaBody,
             message: 'Campos obrigatórios não foram informados'
         });
@@ -115,37 +115,37 @@ cliente.get('/pesquisa/veiculo', async function (req, res, next) {
         if (dadosVeiculoPlaca.error) {
             res.status(500);
             res.send({
-                codigo: 8,
-                message: 'Erro ao veriricar veiculos'
+                codigo: 9,
+                message: 'Erro na pesquisa'
             });
         } else if (dadosVeiculoPlaca.semDados) {
             res.status(400);
             res.send({
-                codigo: 9,
+                codigo: 10,
                 data: body.placa,
                 message: 'Veiculo não cadastrado'
             });
         } else {
             res.status(400);
             res.send({
-                codigo: 10,
+                codigo: 11,
                 data: dadosVeiculoPlaca.dadosVeiculo,
-                message: 'Dados veiculos cadastrados'
+                message: 'Informaçẽos veiculo'
             });
         }
     }
 
 });
 
-cliente.delete('/delete/veiculo', async function (req, res, next) {
-    const body = req.body;
+veiculo.delete('/delete/veiculo/:idVeiculo', async function (req, res, next) {
+    const parametro = req.params
     var errorResponse = []
 
-    let validaBody = await validations.validaBody(body, camposObrigatorioDelete);
+    let validaBody = await validations.validaBody(parametro, camposObrigatorioDelete);
 
     if (validaBody.length) {
         errorResponse.push({
-            codigo: 10,
+            codigo: 12,
             data: validaBody,
             message: 'Campos obrigatórios não foram informados'
         });
@@ -155,23 +155,23 @@ cliente.delete('/delete/veiculo', async function (req, res, next) {
         res.status(400);
         res.send(errorResponse);
     } else {
-        var deletaVeiculo = await veiculoModel.deletarVeiculo(body.idVeiculo);
+        var deletaVeiculo = await veiculoModel.deletarVeiculo(parametro.idVeiculo);
         if (deletaVeiculo.error) {
             res.status(500);
             res.send({
-                codigo: 11,
+                codigo: 13,
                 message: 'Erro ao deletar veiculo'
             });
         } else if (deletaVeiculo.sucessoDelete) {
             res.status(400);
             res.send({
-                codigo: 12,
+                codigo: 14,
                 message: 'Veiculo excluido'
             });
         } else {
             res.status(200);
             res.send({
-                codigo: 13,
+                codigo: 15,
                 message: 'Veiculo informado não encontrado'
             });
         }
@@ -179,15 +179,16 @@ cliente.delete('/delete/veiculo', async function (req, res, next) {
 
 });
 
-cliente.put('/atualiza/veiculo', async function (req, res, next) {
+veiculo.put('/atualiza/veiculo/:idVeiculo', async function (req, res, next) {
     const body = req.body;
+    const parametro = req.params;
     var errorResponse = []
 
     let validaBody = await validations.validaBody(body, camposObrigatorioAtualiza);
 
     if (validaBody.length) {
         errorResponse.push({
-            codigo: 13,
+            codigo: 16,
             data: validaBody,
             message: 'Campos obrigatórios não foram informados'
         });
@@ -197,18 +198,18 @@ cliente.put('/atualiza/veiculo', async function (req, res, next) {
         res.status(400);
         res.send(errorResponse);
     } else {
-        var atualizaDadosVeiculo = await veiculoModel.atualizarDadosVeiculo(body);
+        var atualizaDadosVeiculo = await veiculoModel.atualizarDadosVeiculo(body,parametro.idVeiculo);
         if (atualizaDadosVeiculo.error) {
             res.status(500);
             res.send({
-                codigo: 16,
-                message: 'Erro verificação de veiculo'
+                codigo: 17,
+                message: 'Erro atualizar'
             });
 
         } else {
             res.status(200);
             res.send({
-                codigo: 17,
+                codigo: 18,
                 message: 'Veiculo ataulizado com sucesso'
             });
         }
@@ -217,4 +218,4 @@ cliente.put('/atualiza/veiculo', async function (req, res, next) {
 
 });
 
-module.exports = cliente;
+module.exports = veiculo;

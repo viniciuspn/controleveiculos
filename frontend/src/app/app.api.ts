@@ -1,0 +1,1 @@
+export const openApi = 'http://localhost:7081/oapi/web';

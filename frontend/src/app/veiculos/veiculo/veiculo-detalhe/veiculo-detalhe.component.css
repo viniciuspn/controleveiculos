@@ -1,0 +1,165 @@
+.padding{
+    padding: 16px !important;
+  }
+  .margin{
+    margin: 16px !important;
+  }
+
+  @media screen and (min-width : 375px) and (max-width : 410px){
+    /*Style*/
+    .btn-position-veiculo{
+        margin-left: 50px !important;
+      }
+  }
+  @media screen and (min-width : 414px) and (max-width : 767px){
+    /*Style*/
+    .btn-position-veiculo{
+        margin-left: 70px !important;
+      }
+  }
+  @media screen and (min-width : 768px) and (max-width : 1023px){
+    /*Style*/
+    .btn-position-veiculo{
+        margin-left: 422px !important;
+      }
+  }
+  @media screen and (min-width : 1024px) and (min-height : 1366px){
+    /*Style*/
+    .btn-position-veiculo{
+        margin-left: 664px !important;
+      }
+  }
+
+  @media screen and (min-width : 411px) and (max-width : 413px){
+    /*Style*/
+    .btn-position-veiculo{
+        margin-left: 69px !important;
+      }
+  }
+  @media screen and (min-width : 360px) and (max-width : 374px){
+    /*Style*/
+    .btn-position-veiculo{
+        margin-left: 44px !important;
+      }
+  }
+  @media screen and (min-width : 320px) and (max-width : 359px){
+    /*Style*/
+    .btn-position-veiculo{
+        margin-left: 25px !important;
+      }
+    .lado-direito{
+        margin-right: 20px !important;
+    }
+  }
+  .texto-portaria{
+    margin-right: 20px !important;
+    margin-left: 15px !important;
+    font-size: 1.3em;
+  }
+  .portaria-checkbox{
+    margin-top: 15px !important;
+  }
+  .lado-direito{
+    float: right;
+    margin-right: 30px;
+  }
+  .btn-salvar{
+    color: #fff;
+    background-color: #ea6212;
+    border-color: #ea6212;
+    margin-top: 10px;
+  }
+  .btn-cancelar{
+    color: #ea6212;
+    background-color: #fff;
+    border-color: #fff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .btn-editar-usuario{
+    margin-left: 118px;
+    color: #fff;
+    background-color: #ea6212;
+    border-color: #ea6212;
+    margin-top: 10px;
+  }
+  .btn-editar-veiculo{
+    color: #fff;
+    background-color: #ea6212;
+    border-color: #ea6212;
+    margin-top: 10px;
+  }
+  .tamanho{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+    margin-right: 3px;
+    margin-left: -6px;
+  }
+  .btn-position{
+    margin-left: 524px;
+  }
+  .btn-position-veiculo{
+    margin-left: 845px;
+  }
+  .btn-separador{
+    margin-right: 20px;
+    margin-left: 5px;
+  }
+  .center-screen {
+    position: absolute;
+    top: 3%;
+    left: 47%;
+    padding-top: 100px;
+  }
+  .teste{
+    overflow: hidden;
+    padding-top: 10px;
+  }
+  .veiculo-principal{
+    margin-left: 0px;
+  }
+  .addAddress{
+    margin-left: 970px;
+    margin-top: 25px;
+    cursor: pointer;
+  }
+  .ajuste{
+    margin-top: 10px;
+  }
+  .padding-veiculo{
+    padding-right: 40px;
+  }
+  .margin-right-10{
+    margin-right: 10px;
+  }
+  .margin-right-5{
+    margin-right: 5px;
+  }
+  .margin-left-9{
+    margin-left: -9px;
+  }
+  .margin-left-15{
+    margin-left: 15px;
+  }
+  .flex-50{
+    flex-basis: 50% !important;
+  }
+  .flex-30{
+    flex-basis: 30% !important;
+  }
+  .tamanho-check{
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+  }
+  .addAddress:hover{
+    color: #ea6212;
+  }
+  .marginPanel{
+    margin-left: 4px !important;
+    margin-right: 4px !important;
+  }
+  mat-dialog-container.mat-dialog-container {
+    margin-top: -2500px !important;
+  }

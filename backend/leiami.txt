@@ -1,0 +1,58 @@
+Para executar aplicação é necessário ter o node js, npm  e SQLite3  instalado em sua máquina.
+Link para dowload 
+node 8.9.4: https://nodejs.org/en/download/
+SQLite3: https://www.sqlite.org/download.html
+
+Instalação no Linux​​ :
+acesso terminal e digite o seguintes comandos abaixo:
+Instalar node js​​ :
+sudo apt-get update
+sudo apt-get install nodejs
+sudo apt-get install npm
+
+Instalar o SQLite3
+apt-get install sqlite3
+apt-get install libsqlite3-dev
+apt-get install sqlitebrowser
+
+
+Após a instalação acessar a pasta do projeto e instalar as dependências utilize o comando ‘npm install’
+Após a instalação das dependência execute o comando npm run dev’ para levantar o serviço.
+
+
+Urls:
+
+--------------Cadastro-----------------------
+Url: http://localhost:7081/oapi/web/cadastro/veiculo
+Metodo: post
+Encaminhar para o backand: placa, chassi, renavam, modelo, marca e ano via body;
+campo obrigatorio: placa, chassi, renavam, modelo, marca, ano via body;
+Ação: Cadastro de Veiculo
+
+--------------Listar-------------------------
+Url: http://localhost:7081/oapi/web/retorna/veiculos
+Metodo: get
+Encaminhar para o backand: 
+campo obrigatorio: 
+Ação: Listar veiculos cadastros
+
+------------Pesquisa Por placa------------------
+Url: http://localhost:7081/oapi/web/pesquisa/veiculo
+Metodo: get
+Encaminhar para o backand:  placa via body;
+campo obrigatorio: placa
+Ação: Pesquisa de veiculos por placa
+
+-------------Altear-----------------------------
+Url: http://localhost:7081/oapi/web/atualiza/veiculo/:idVeiculo
+Metodo: put
+Encaminhar para o backand: placa, chassi, renavam, modelo, marca e ano via body;  idVeiculo via parametro;
+campo obrigatorio: placa, chassi, renavam, modelo, marca, ano idVeiculo;
+Ação: Atalizar inoformaçẽos do veiculo
+
+-------------Excluir-----------------------------
+Url: http://localhost:7081/oapi/web/delete/veiculo/:idVeiculo
+Metodo: put
+Encaminhar para o backand: idVeiculo via parametro;
+campo obrigatorio:  idVeiculo ;
+Ação: Excluir veiculo selecionado

@@ -1,0 +1,5 @@
+<div class="alert"
+    [ngClass]="{'alert-success': data.type === 'success', 'alert-danger': data.type === 'danger', 'alert-warning': data.type === 'warning', 'alert-info': data.type === 'info'}"
+    role="alert">
+    {{data.message}}
+</div>

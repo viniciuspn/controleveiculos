@@ -1,0 +1,153 @@
+.padding{
+    padding: 16px !important;
+  }
+  .margin{
+    margin: 16px !important;
+  }
+  /* @media screen and (max-width : 767px){ */
+    /*Style*/
+    /* .addAddress{
+        margin-left: 80px !important;
+      } */
+  /* } */
+  @media screen and (min-width : 375px) and (max-width : 410px){
+    /*Style*/
+    .addAddress{
+        margin-left: 182px !important;
+      }
+  }
+  @media screen and (min-width : 414px) and (max-width : 767px){
+    /*Style*/
+    .addAddress{
+        margin-left: 222px !important;
+      }
+  }
+  @media screen and (min-width : 768px) and (max-width : 1023px){
+    /*Style*/
+    .addAddress{
+        margin-left: 545px !important;
+      }
+  }
+  @media screen and (min-width : 1024px) and (min-height : 1366px){
+    /*Style*/
+    .addAddress{
+        margin-left: 783px !important;
+      }
+  }
+  /* @media screen and (min-width : 375px) and (min-height : 812px){ */
+    /*Style*/
+    /* .addAddress{
+        margin-left: 183px !important;
+      } */
+  /* }  */
+  /* @media screen and (min-width : 411px) and (min-height : 823px){ */
+    /*Style*/
+    /* .addAddress{
+        margin-left: 218px !important;
+      } */
+  /* } */
+  @media screen and (min-width : 411px) and (max-width : 413px){
+    /*Style*/
+    .addAddress{
+        margin-left: 218px !important;
+      }
+  }
+  @media screen and (min-width : 360px) and (max-width : 374px){
+    /*Style*/
+    .addAddress{
+        margin-left: 168px !important;
+      }
+  }
+  @media screen and (min-width : 320px) and (max-width : 359px){
+    /*Style*/
+    .addAddress{
+        margin-left: 129px !important;
+      }
+  }
+
+  .lado-direito{
+    float: right;
+    margin-right: 30px;
+  }
+  .btn-salvar{
+    color: #fff;
+    background-color: #ea6212;
+    border-color: #ea6212;
+    margin-top: 10px;
+  }
+  .btn-cancelar{
+    color: #ea6212;
+    background-color: #fff;
+    border-color: #fff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .btn-editar-usuario{
+    margin-left: 118px;
+    color: #fff;
+    background-color: #ea6212;
+    border-color: #ea6212;
+    margin-top: 10px;
+  }
+  .btn-editar-veiculo{
+    color: #fff;
+    background-color: #ea6212;
+    border-color: #ea6212;
+    margin-top: 10px;
+  }
+  .tamanho{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+    margin-right: 3px;
+    margin-left: -6px;
+  }
+  .btn-position{
+    margin-left: 524px;
+  }
+  .btn-position-veiculo{
+    margin-left: 845px;
+  }
+  .btn-separador{
+    margin-right: 20px;
+    margin-left: 5px;
+  }
+  .center-screen {
+    position: absolute;
+    top: 3%;
+    left: 47%;
+    padding-top: 100px;
+  }
+  .teste{
+    overflow: hidden;
+    padding-top: 10px;
+  }
+  .veiculo-principal{
+    margin-left: 0px;
+  }
+  .addAddress{
+    margin-left: 970px;
+    margin-top: 25px;
+    cursor: pointer;
+  }
+  .ajuste{
+    margin-top: 10px;
+  }
+  .padding-veiculo{
+    padding-right: 40px;
+  }
+  .tamanho-check{
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+  }
+  .addAddress:hover{
+    color: #ea6212;
+  }
+  .marginPanel{
+    margin-left: 4px !important;
+    margin-right: 4px !important;
+  }
+  mat-dialog-container.mat-dialog-container {
+    margin-top: -2500px !important;
+  }

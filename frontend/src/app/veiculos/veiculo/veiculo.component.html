@@ -1,0 +1,16 @@
+<mat-accordion>
+    <p class="addAddress" (click)="teste()"><span class="icon-button-add" aria-hidden="true"></span>
+        Adicionar Veiculo
+    </p>
+    <app-veiculo-detalhe *ngIf="adicionarVeiculo" [veiculoDetalhe]="novoVeiculo"
+        (cancelarNovoVeiculo)="cancelarNovo($event)" (novoVeiculoSucesso)="novoVeiculoInserido($event)">
+    </app-veiculo-detalhe>
+    <app-veiculo-detalhe *ngFor="let veiculo of dadosVeiculo" [VeiculoDetalhe]="veiculo"
+        (novoVeiculoSucesso)="novoVeiculoInserido($event)"></app-veiculo-detalhe>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</mat-accordion>

@@ -90,7 +90,6 @@ module.exports = function () {
         };
         let promise = await clienteSql.deleteVeiculo(idVeiculo)
             .then(function (rowsDeleteVeiculo) {
-                console.log(rowsDeleteVeiculo)
                 if (rowsDeleteVeiculo > 0) {
                     retorno.sucessoDelete = true
                 }
@@ -102,12 +101,12 @@ module.exports = function () {
         return retorno;
     };
 
-    async function atualizarDadosVeiculo(dados) {
+    async function atualizarDadosVeiculo(dados, idVeiculo) {
         let retorno = {
             sucessoDados: false,
             error: undefined
         };
-        let promise = await clienteSql.atualizaDadosVeiculo(dados)
+        let promise = await clienteSql.atualizaDadosVeiculo(dados, idVeiculo)
             .then(function (rowsAtualizaDadosVeiculo) {
                 retorno.sucessoDados = true;
             })

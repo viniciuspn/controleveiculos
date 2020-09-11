@@ -1,0 +1,93 @@
+<mat-expansion-panel *ngIf="!excluir" (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+  [expanded]="!(this.veiculoDetalhe.idveiculo > 0)" class="marginPanel">
+  <form [formGroup]="veiculoForm">
+    <div class="row">
+
+      <div class="col-lg-4 col-sm-4">
+        <mat-form-field class="width-material-kit">
+          <input matInput placeholder="Placa" name="placa" type="text" name="placa" formControlName="placa" required
+            autocomplete="off" value="{{veiculoDetalhe.placa}}">
+          <mat-error *ngIf="veiculoForm.get('placa').hasError('required')">
+            Campo <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4 col-sm-4">
+        <mat-form-field class="width-material-kit">
+          <input matInput placeholder="Chassi" name="chassi" type="text" name="chassi" formControlName="chassi" required
+            autocomplete="off" value="{{veiculoDetalhe.chassi}}">
+          <mat-error *ngIf="veiculoForm.get('chassi').hasError('required')">
+            Campo <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4 col-sm-4">
+        <mat-form-field class="width-material-kit">
+          <input matInput placeholder="Renavam" name="renavam" type="text" name="renavam" formControlName="renavam"
+            required autocomplete="off" value="{{veiculoDetalhe.renavam}}">
+          <mat-error *ngIf="veiculoForm.get('renavam').hasError('required')">
+            Campo <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4 col-sm-4">
+        <mat-form-field class="width-material-kit">
+          <input matInput placeholder="Modelo" name="modelo" type="text" name="modelo" formControlName="modelo" required
+            autocomplete="off" value="{{veiculoDetalhe.modelo}}">
+          <mat-error *ngIf="veiculoForm.get('modelo').hasError('required')">
+            Campo <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4 col-sm-4">
+        <mat-form-field class="width-material-kit">
+          <input matInput placeholder="Marca" name="marca" type="text" name="marca" formControlName="marca" required
+            autocomplete="off" value="{{veiculoDetalhe.marca}}">
+          <mat-error *ngIf="veiculoForm.get('marca').hasError('required')">
+            Campo <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4 col-sm-4">
+        <mat-form-field class="width-material-kit">
+          <input matInput placeholder="Ano" name="ano" type="text" name="ano" formControlName="ano" required
+            autocomplete="off" value="{{veiculoDetalhe.ano}}">
+          <mat-error *ngIf="veiculoForm.get('ano').hasError('required')">
+            Campo <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-lg-4 col-sm-4">
+        <mat-form-field class="width-material-kit">
+          <input matInput placeholder="Cidade" name="cidade" type="text" name="cidade" formControlName="cidade" required
+            autocomplete="off" value="{{veiculoDetalhe.cidade}}">
+          <mat-error *ngIf="veiculoForm.get('cidade').hasError('required')">
+            Campo <strong>obrigatório</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <div class="btn-position-veiculo">
+        <button mat-raised-button type="button" class="lado-direito btn-editar-veiculo" (click)="editarVeiculo()"
+          *ngIf="!editarInfo">
+          <span class="icon-pencil margin-right-5 margin-left-9" aria-hidden="true"></span>Editar</button>
+        <button mat-raised-button type="button" class="lado-direito btn-cancelar" *ngIf="!editarInfo"
+          (click)="excluirVeiculo()">
+          <span class="icon-bin margin-right-5 margin-left-9" aria-hidden="true"></span>Excluir</button>
+        <button mat-raised-button
+          [disabled]="veiculoForm.get('placa').hasError('required') || veiculoForm.get('chassi').hasError('required')
+                               || veiculoForm.get('renavam').hasError('required') || veiculoForm.get('modelo').hasError('required') || veiculoForm.get('marca').hasError('required') || veiculoForm.get('ano').hasError('required')"
+          class="lado-direito btn-salvar" (click)="salvarVeiculo()" *ngIf="editarInfo">Salvar</button>
+        <button mat-raised-button type="button" class="lado-direito btn-cancelar" (click)="cancelaEditVeiculo()"
+          *ngIf="editarInfo">Cancelar</button>
+      </div>
+    </div>
+  </form>
+</mat-expansion-panel>

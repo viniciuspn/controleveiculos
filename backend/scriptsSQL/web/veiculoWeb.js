@@ -58,9 +58,9 @@ module.exports = function () {
             .delete();
     };
 
-    function atualizaDadosVeiculo(dados) {
+    function atualizaDadosVeiculo(dados, idVeiculo) {
         return connVeiculo('veiculos')
-            .where('id', '=', dados.idVeiculo)
+            .where('id', '=', idVeiculo)
             .update({
                 placa: dados.placa,
                 chassi: dados.chassi,
