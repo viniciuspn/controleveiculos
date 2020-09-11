@@ -58,12 +58,26 @@ module.exports = function () {
             .delete();
     };
 
+    function atualizaDadosVeiculo(dados) {
+        return connVeiculo('veiculos')
+            .where('id', '=', dados.idVeiculo)
+            .update({
+                placa: dados.placa,
+                chassi: dados.chassi,
+                renavam: dados.renavam,
+                modelo: dados.modelo,
+                marca: dados.marca,
+                ano: dados.ano
+            });
+    }
+
     return {
         validaVeiculo: validaVeiculo,
         inseriVeiculo: inseriVeiculo,
         listaVeiculo: listaVeiculo,
         listaVeiculoPlaca: listaVeiculoPlaca,
-        deleteVeiculo: deleteVeiculo
+        deleteVeiculo: deleteVeiculo,
+        atualizaDadosVeiculo: atualizaDadosVeiculo
     };
 
 };

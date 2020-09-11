@@ -7,6 +7,7 @@ const validations = require('../../../util/validations')();
 const camposObrigatorioCadastro = ['marca', 'modelo', 'ano', 'renavam', 'placa', 'chassi'];
 const camposObrigatorioPesquisaPlaca = ['placa'];
 const camposObrigatorioDelete = ['idVeiculo'];
+const camposObrigatorioAtualiza = ['idVeiculo', 'marca', 'modelo', 'ano', 'renavam', 'placa', 'chassi'];
 
 cliente.post('/cadastro/veiculo', async function (req, res, next) {
     const body = req.body;
@@ -44,7 +45,6 @@ cliente.post('/cadastro/veiculo', async function (req, res, next) {
                 });
             } else {
                 var inserirVeiculo = await veiculoModel.inserirVeiculo(body);
-                console.error(inserirVeiculo.error);
                 if (inserirVeiculo.error) {
                     res.status(500);
                     res.send({
@@ -169,12 +169,50 @@ cliente.delete('/delete/veiculo', async function (req, res, next) {
                 message: 'Veiculo excluido'
             });
         } else {
-            res.status(400);
+            res.status(200);
             res.send({
                 codigo: 13,
                 message: 'Veiculo informado não encontrado'
             });
         }
+    }
+
+});
+
+cliente.put('/atualiza/veiculo', async function (req, res, next) {
+    const body = req.body;
+    var errorResponse = []
+
+    let validaBody = await validations.validaBody(body, camposObrigatorioAtualiza);
+
+    if (validaBody.length) {
+        errorResponse.push({
+            codigo: 13,
+            data: validaBody,
+            message: 'Campos obrigatórios não foram informados'
+        });
+    };
+
+    if (errorResponse.length) {
+        res.status(400);
+        res.send(errorResponse);
+    } else {
+        var atualizaDadosVeiculo = await veiculoModel.atualizarDadosVeiculo(body);
+        if (atualizaDadosVeiculo.error) {
+            res.status(500);
+            res.send({
+                codigo: 16,
+                message: 'Erro verificação de veiculo'
+            });
+
+        } else {
+            res.status(200);
+            res.send({
+                codigo: 17,
+                message: 'Veiculo ataulizado com sucesso'
+            });
+        }
+
     }
 
 });

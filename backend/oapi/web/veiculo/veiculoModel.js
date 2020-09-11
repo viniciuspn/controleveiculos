@@ -102,11 +102,29 @@ module.exports = function () {
         return retorno;
     };
 
+    async function atualizarDadosVeiculo(dados) {
+        let retorno = {
+            sucessoDados: false,
+            error: undefined
+        };
+        let promise = await clienteSql.atualizaDadosVeiculo(dados)
+            .then(function (rowsAtualizaDadosVeiculo) {
+                retorno.sucessoDados = true;
+            })
+            .catch(function (error) {
+                retorno.error = error;
+            })
+
+        return retorno;
+
+    };
+
     return {
         validaVeiculo: validaVeiculo,
         inserirVeiculo: inserirVeiculo,
         listarVeiculos: listarVeiculos,
         listarVeiculoPlaca: listarVeiculoPlaca,
-        deletarVeiculo: deletarVeiculo
+        deletarVeiculo: deletarVeiculo,
+        atualizarDadosVeiculo: atualizarDadosVeiculo
     }
 };
