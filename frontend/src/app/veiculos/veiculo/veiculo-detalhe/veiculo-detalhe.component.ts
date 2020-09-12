@@ -9,7 +9,6 @@ import { VeiculoComponent } from '../veiculo.component';
   templateUrl: './veiculo-detalhe.component.html',
   styleUrls: ['./veiculo-detalhe.component.css']
 })
-
 export class VeiculosDetalheComponent implements OnInit {
 
   panelOpenState = false;
